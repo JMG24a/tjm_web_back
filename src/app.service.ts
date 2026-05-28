@@ -13,7 +13,8 @@ export class AppService {
     return this.preciosRepo.findOneBy({id});
   }
 
-  async patchPrice(id: number, price) {
-    return await this.preciosRepo.update(id, {precio: price});
+  async patchPrice(id: number, precio: number) {
+    await this.preciosRepo.update(id, { precio });
+    return { message: 'Precio actualizado', id, precio };
   }
 }
