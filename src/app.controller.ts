@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -13,6 +13,13 @@ export class AppController {
 
   @Patch()
   patchPrice(@Body() body: { id: number; precio: number }) {
+  console.log("🚀 ~ AppController ~ patchPrice ~ body:", body)
+  if (!body.id) {
+    throw new BadRequestException("El ID es obligatorio");
+  }
+  if (body.precio === undefined) {
+    throw new BadRequestException("El precio es obligatorio");
+  }
     return this.appService.patchPrice(body.id, body.precio);
   }
 
