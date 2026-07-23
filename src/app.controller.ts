@@ -30,16 +30,15 @@ export class AppController {
     return this.appService.actualizarDesdeExcel(file);
   }
 
-  @Get("carousel")
-  getCarousels(
-    @Query("page") page: number = 1,
-    @Query("limit") limit: number = 3
-  ) {
-    return this.appService.getCarousels(page, limit);
+  @Get("carrusel/:group")
+  getCarouselsByGroup(@Param("group") group: string) {
+    console.log("🚀 ~ AppController ~ getCarouselsByGroup ~ group:", group)
+    return this.appService.getCarouselsByGroup(group);
   }
 
   @Post("carousel")
   createCarousel(@Body() dto: CreateCarouselDto) {
+    console.log("🚀 ~ AppController ~ createCarousel ~ dto:", dto)
     return this.appService.createCarousel(dto);
   }
 }

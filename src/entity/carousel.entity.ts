@@ -16,4 +16,7 @@ export class Carousels {
 
   @Column({ type: 'text' })
   alt: string;
+
+  @Column({ type: 'varchar', length: 50})
+  group: string;
 }

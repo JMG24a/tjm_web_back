@@ -51,25 +51,17 @@ export class AppService {
     };
   }
 
-  async getCarousels(page: number, limit: number) {
-    const skip = (page - 1) * limit;
-
-    const [data, total] = await this.carouselsRepo.findAndCount({
-      skip,
-      take: limit,
+  async getCarouselsByGroup(group: string) {
+    console.log("🚀 ~ AppService ~ getCarouselsByGroup ~ group:", group)
+    return await this.carouselsRepo.find({
+      where: { group },
       order: { id: "ASC" }
     });
-
-    return {
-      page,
-      limit,
-      total,
-      data
-    };
   }
 
   async createCarousel(dto: CreateCarouselDto) {
     const newItem = this.carouselsRepo.create(dto);
+    console.log("🚀 ~ AppService ~ createCarousel ~ newItem:", newItem)
     return await this.carouselsRepo.save(newItem);
   }
 
