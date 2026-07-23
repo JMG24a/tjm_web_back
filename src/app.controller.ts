@@ -1,6 +1,7 @@
-import { BadRequestException, Body, Controller, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Get, Param, Patch, Post, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { CreateCarouselDto } from './entity/create-carousel.dto';
 
 @Controller()
 export class AppController {
@@ -27,5 +28,18 @@ export class AppController {
   @UseInterceptors(FileInterceptor('file'))
   actualizarExcel(@UploadedFile() file: any) {
     return this.appService.actualizarDesdeExcel(file);
+  }
+
+  @Get("carousel")
+  getCarousels(
+    @Query("page") page: number = 1,
+    @Query("limit") limit: number = 3
+  ) {
+    return this.appService.getCarousels(page, limit);
+  }
+
+  @Post("carousel")
+  createCarousel(@Body() dto: CreateCarouselDto) {
+    return this.appService.createCarousel(dto);
   }
 }

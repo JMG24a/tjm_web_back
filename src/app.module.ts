@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Precios } from './entity/prices.entity';
+import { Carousels } from './entity/carousel.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
@@ -15,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true, // solo para desarrollo 
       ssl: { rejectUnauthorized: false }, // necesario para Neon
     }),
-    TypeOrmModule.forFeature([Precios])
+    TypeOrmModule.forFeature([Precios, Carousels])
   ],
   controllers: [AppController],
   providers: [AppService],

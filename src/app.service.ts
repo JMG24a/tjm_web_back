@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Precios } from './entity/prices.entity';
+import { Carousels } from './entity/carousel.entity';
 import * as XLSX from 'xlsx';
+import { CreateCarouselDto } from './entity/create-carousel.dto';
 
 @Injectable()
 export class AppService {
   constructor( 
     @InjectRepository(Precios) private readonly preciosRepo: Repository<Precios>, 
+    @InjectRepository(Carousels) private readonly carouselsRepo: Repository<Carousels>, 
   ) {}
 
   getPrice(id: number) {
@@ -47,4 +50,27 @@ export class AppService {
       totalActualizados: productos.length,
     };
   }
+
+  async getCarousels(page: number, limit: number) {
+    const skip = (page - 1) * limit;
+
+    const [data, total] = await this.carouselsRepo.findAndCount({
+      skip,
+      take: limit,
+      order: { id: "ASC" }
+    });
+
+    return {
+      page,
+      limit,
+      total,
+      data
+    };
+  }
+
+  async createCarousel(dto: CreateCarouselDto) {
+    const newItem = this.carouselsRepo.create(dto);
+    return await this.carouselsRepo.save(newItem);
+  }
+
 }
