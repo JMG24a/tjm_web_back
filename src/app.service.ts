@@ -5,6 +5,7 @@ import { Precios } from './entity/prices.entity';
 import { Carousels } from './entity/carousel.entity';
 import * as XLSX from 'xlsx';
 import { CreateCarouselDto } from './entity/create-carousel.dto';
+import { UpdateCarouselDto } from './entity/carousel.edit.dto';
 
 @Injectable()
 export class AppService {
@@ -63,6 +64,11 @@ export class AppService {
     const newItem = this.carouselsRepo.create(dto);
     console.log("🚀 ~ AppService ~ createCarousel ~ newItem:", newItem)
     return await this.carouselsRepo.save(newItem);
+  }
+
+  async updateCarousel(id: number, dto: UpdateCarouselDto) {
+    await this.carouselsRepo.update(id, dto);
+    return this.carouselsRepo.findOneBy({ id });
   }
 
 }

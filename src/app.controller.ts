@@ -2,6 +2,7 @@ import { BadRequestException, Body, Controller, Get, Param, Patch, Post, Query, 
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateCarouselDto } from './entity/create-carousel.dto';
+import { UpdateCarouselDto } from './entity/carousel.edit.dto';
 
 @Controller()
 export class AppController {
@@ -14,7 +15,6 @@ export class AppController {
 
   @Patch()
   patchPrice(@Body() body: { id: number; precio: number }) {
-  console.log("🚀 ~ AppController ~ patchPrice ~ body:", body)
   if (!body.id) {
     throw new BadRequestException("El ID es obligatorio");
   }
@@ -41,4 +41,13 @@ export class AppController {
     console.log("🚀 ~ AppController ~ createCarousel ~ dto:", dto)
     return this.appService.createCarousel(dto);
   }
+
+  @Patch("carrusel/:id")
+  updateCarousel(
+    @Param("id") id: number,
+    @Body() dto: UpdateCarouselDto
+  ) {
+    return this.appService.updateCarousel(id, dto);
+  }
+
 }
