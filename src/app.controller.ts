@@ -30,6 +30,11 @@ export class AppController {
     return this.appService.actualizarDesdeExcel(file);
   }
 
+  @Get("carrusel")
+  getCarousels() {
+    return this.appService.getCarousels();
+  }
+
   @Get("carrusel/:group")
   getCarouselsByGroup(@Param("group") group: string) {
     console.log("🚀 ~ AppController ~ getCarouselsByGroup ~ group:", group)

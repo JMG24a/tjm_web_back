@@ -52,6 +52,12 @@ export class AppService {
     };
   }
 
+  async getCarousels() {
+    return await this.carouselsRepo.find({
+      order: { id: "ASC" }
+    });
+  }
+
   async getCarouselsByGroup(group: string) {
     console.log("🚀 ~ AppService ~ getCarouselsByGroup ~ group:", group)
     return await this.carouselsRepo.find({
