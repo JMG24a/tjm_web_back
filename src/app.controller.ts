@@ -32,6 +32,7 @@ export class AppController {
 
   @Get("carrusel")
   getCarousels() {
+    console.log("config-arg")
     return this.appService.getCarousels();
   }
 
