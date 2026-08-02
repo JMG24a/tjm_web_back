@@ -8,6 +8,12 @@ import { UpdateCarouselDto } from './entity/carousel.edit.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  @Get("carrusel")
+  getCarousels() {
+    console.log("config-arg")
+    return this.appService.getCarousels();
+  }
+  
   @Get(":id")
   getPrice(@Param('id') id: number) {
     return this.appService.getPrice(id);
@@ -30,11 +36,6 @@ export class AppController {
     return this.appService.actualizarDesdeExcel(file);
   }
 
-  @Get("carrusel")
-  getCarousels() {
-    console.log("config-arg")
-    return this.appService.getCarousels();
-  }
 
   @Get("carrusel/:group")
   getCarouselsByGroup(@Param("group") group: string) {
