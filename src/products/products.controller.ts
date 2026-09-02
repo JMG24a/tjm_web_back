@@ -13,7 +13,6 @@ export class ProductsController {
 
   @Get("category/:category")
   findByCategory(@Param("category") category: string) {
-    console.log("🚀 ~ ProductsController ~ findByCategory ~ category:", category)
     return this.productsService.findByCategory(category);
   }
 
