@@ -13,9 +13,9 @@ export class AppController {
     return this.appService.getCarousels();
   }
   
-  @Get("category/:c")
-  getProducts(@Param('category') c: string) {
-    return this.appService.findByCategory(c);
+ @Get("category/:category")
+  getProducts(@Param('category') category: string) {
+    return this.appService.findByCategory(category);
   }
 
   @Get(":id")
