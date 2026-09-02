@@ -54,21 +54,21 @@ async function bootstrap() {
   // 1. Definimos los dominios permitidos
   const allowedOrigins = [
     'https://muebleriatiojaime.vercel.app',
-    'http://localhost:3000/',
     'https://muebleriatiojaime.com',
     'https://www.muebleriatiojaime.com', // Agregamos la versión con www por si acaso
   ];
 
   // 2. Configuramos CORS en NestJS pasándole una función de validación
   app.enableCors({
-    origin: (origin, callback) => {
-      // Si la petición no tiene origin (como Postman/Server-to-Server) o está en la lista, permitimos
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
+    // origin: (origin, callback) => {
+    //   // Si la petición no tiene origin (como Postman/Server-to-Server) o está en la lista, permitimos
+    //   if (!origin || allowedOrigins.includes(origin)) {
+    //     callback(null, true);
+    //   } else {
+    //     callback(new Error('Not allowed by CORS'));
+    //   }
+    // },
+    origin: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
