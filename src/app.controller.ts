@@ -12,13 +12,7 @@ export class AppController {
   getCarousels() {
     return this.appService.getCarousels();
   }
-  
-  @Get("category/:category")
-  getProducts(@Param('category') category: string) {
-    return this.appService.findByCategory(category);
-  }
-
-  
+    
   @Patch()
   patchPrice(@Body() body: { id: number; precio: number }) {
     if (!body.id) {
@@ -56,7 +50,7 @@ export class AppController {
   ) {
     return this.appService.updateCarousel(id, dto);
   }
-  
+
   @Get(":id")
   getPrice(@Param('id') id: number) {
     return this.appService.getPrice(id);
