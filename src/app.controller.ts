@@ -18,41 +18,37 @@ export class AppController {
     return this.appService.findByCategory(category);
   }
 
-  @Get(":id")
-  getPrice(@Param('id') id: number) {
-    return this.appService.getPrice(id);
-  }
-
+  
   @Patch()
   patchPrice(@Body() body: { id: number; precio: number }) {
-  if (!body.id) {
-    throw new BadRequestException("El ID es obligatorio");
-  }
-  if (body.precio === undefined) {
-    throw new BadRequestException("El precio es obligatorio");
-  }
+    if (!body.id) {
+      throw new BadRequestException("El ID es obligatorio");
+    }
+    if (body.precio === undefined) {
+      throw new BadRequestException("El precio es obligatorio");
+    }
     return this.appService.patchPrice(body.id, body.precio);
   }
-
+  
   @Post('actualizar-excel')
   @UseInterceptors(FileInterceptor('file'))
   actualizarExcel(@UploadedFile() file: any) {
     return this.appService.actualizarDesdeExcel(file);
   }
-
-
+  
+  
   @Get("carrusel/:group")
   getCarouselsByGroup(@Param("group") group: string) {
     console.log("🚀 ~ AppController ~ getCarouselsByGroup ~ group:", group)
     return this.appService.getCarouselsByGroup(group);
   }
-
+  
   @Post("carousel")
   createCarousel(@Body() dto: CreateCarouselDto) {
     console.log("🚀 ~ AppController ~ createCarousel ~ dto:", dto)
     return this.appService.createCarousel(dto);
   }
-
+  
   @Patch("carrusel/:id")
   updateCarousel(
     @Param("id") id: number,
@@ -60,5 +56,10 @@ export class AppController {
   ) {
     return this.appService.updateCarousel(id, dto);
   }
-
+  
+  @Get(":id")
+  getPrice(@Param('id') id: number) {
+    return this.appService.getPrice(id);
+  }
+  
 }
