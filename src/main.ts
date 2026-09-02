@@ -54,6 +54,7 @@ async function bootstrap() {
   // 1. Definimos los dominios permitidos
   const allowedOrigins = [
     'https://muebleriatiojaime.vercel.app',
+    'http://localhost:3000/',
     'https://muebleriatiojaime.com',
     'https://www.muebleriatiojaime.com', // Agregamos la versión con www por si acaso
   ];
