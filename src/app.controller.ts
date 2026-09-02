@@ -4,7 +4,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateCarouselDto } from './entity/create-carousel.dto';
 import { UpdateCarouselDto } from './entity/carousel.edit.dto';
 
-@Controller()
+@Controller("core")
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
