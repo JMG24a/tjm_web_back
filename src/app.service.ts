@@ -6,16 +6,22 @@ import { Carousels } from './entity/carousel.entity';
 import * as XLSX from 'xlsx';
 import { CreateCarouselDto } from './entity/create-carousel.dto';
 import { UpdateCarouselDto } from './entity/carousel.edit.dto';
+import { Product, CreateProductDto,  } from './entity/product.dto';
 
 @Injectable()
 export class AppService {
   constructor( 
     @InjectRepository(Precios) private readonly preciosRepo: Repository<Precios>, 
     @InjectRepository(Carousels) private readonly carouselsRepo: Repository<Carousels>, 
+    @InjectRepository(Product) private readonly categoryRepo: Repository<Product>, 
   ) {}
 
   getPrice(id: number) {
     return this.preciosRepo.findOneBy({id});
+  }
+
+  findByCategory(category: string) {
+    return this.categoryRepo.find({ where: { category } });
   }
 
   async patchPrice(id: number, precio: number) {

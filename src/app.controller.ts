@@ -10,10 +10,14 @@ export class AppController {
 
   @Get("carrusel")
   getCarousels() {
-    console.log("config-arg")
     return this.appService.getCarousels();
   }
   
+  @Get("category/:c")
+  getProducts(@Param('category') c: string) {
+    return this.appService.findByCategory(c);
+  }
+
   @Get(":id")
   getPrice(@Param('id') id: number) {
     return this.appService.getPrice(id);
