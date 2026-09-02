@@ -13,7 +13,7 @@ export class AppController {
     return this.appService.getCarousels();
   }
   
- @Get("category/:category")
+  @Get("category/:category")
   getProducts(@Param('category') category: string) {
     return this.appService.findByCategory(category);
   }
