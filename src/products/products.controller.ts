@@ -1,7 +1,6 @@
 import { Controller, Get, Post, Param, Body, Res, HttpStatus, HttpException, Patch } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
-import { Response } from 'express';
 import { Products } from "./product.entity";
 
 @Controller("products")
@@ -13,19 +12,22 @@ export class ProductsController {
     return this.productsService.create(dto);
   }
 
-  @Get('category/:category')
-  async findByCategory(@Param('category') category: string, @Res() res: Response) {
-    try {
-      const products = await this.productsService.findByCategory(category);
-      return res.status(HttpStatus.OK).json(products);
-    } catch (error) {
-      console.error('Error in findByCategory:', error);
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+@Get('category/:category')
+async findByCategory(@Param('category') category: string) {
+  try {
+    const products = await this.productsService.findByCategory(category);
+    return products; // Nest serializa automáticamente
+  } catch (error) {
+    console.error('Error in findByCategory:', error);
+    throw new HttpException(
+      {
         message: 'Error fetching products',
-        detail: error?.message ?? null
-      });
-    }
+        detail: error?.message ?? null,
+      },
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
+}
 
   @Get(":id")
   findOne(@Param("id") id: number) {
