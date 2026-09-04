@@ -57,7 +57,6 @@ export class AppService {
   }
 
   async getCarouselsByGroup(group: string) {
-    console.log("🚀 ~ AppService ~ getCarouselsByGroup ~ group:", group)
     return await this.carouselsRepo.find({
       where: { group },
       order: { id: "ASC" }
@@ -71,6 +70,7 @@ export class AppService {
   }
 
   async updateCarousel(id: number, dto: UpdateCarouselDto) {
+    console.log("🚀 ~ AppService ~ updateCarousel ~ UpdateCarouselDto:", UpdateCarouselDto)
     await this.carouselsRepo.update(id, dto);
     return this.carouselsRepo.findOneBy({ id });
   }

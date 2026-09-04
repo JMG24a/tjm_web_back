@@ -40,6 +40,7 @@ async findByCategory(@Param('category') category: string) {
     @Body() body: Partial<Products>
   ) {
     try {
+      console.log("🚀 ~ ProductsController ~ updateProduct ~ body:", id, body)
       const updated = await this.productsService.updateProduct(id, body);
       return {
         message: "Producto actualizado correctamente",
