@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Param, Body, Res, HttpStatus } from "@nestjs/common";
+import { Controller, Get, Post, Param, Body, Res, HttpStatus, Put, HttpException } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { Response } from 'express';
+import { Products } from "./product.entity";
 
 @Controller("products")
 export class ProductsController {
@@ -29,5 +30,25 @@ export class ProductsController {
   @Get(":id")
   findOne(@Param("id") id: number) {
     return this.productsService.findOne(id);
+  }
+
+  @Put(":id")
+  async updateProduct(
+    @Param("id") id: number,
+    @Body() body: Partial<Products>
+  ) {
+    try {
+      const updated = await this.productsService.updateProduct(id, body);
+      return {
+        message: "Producto actualizado correctamente",
+        product: updated,
+      };
+    } catch (error) {
+      console.error("Error updating product:", error);
+      throw new HttpException(
+        "No se pudo actualizar el producto",
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
   }
 }
