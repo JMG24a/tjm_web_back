@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Param, Body, Res, HttpStatus, Put, HttpException } from "@nestjs/common";
+import { Controller, Get, Post, Param, Body, Res, HttpStatus, HttpException, Patch } from "@nestjs/common";
 import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { Response } from 'express';
@@ -32,7 +32,7 @@ export class ProductsController {
     return this.productsService.findOne(id);
   }
 
-  @Put(":id")
+  @Patch(":id")
   async updateProduct(
     @Param("id") id: number,
     @Body() body: Partial<Products>
