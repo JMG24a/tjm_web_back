@@ -5,7 +5,10 @@ export class Products {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({type: "varchar", nullable: true})
+  id_cashea: string;
+
+  @Column('varchar')
   category: string;
 
   @Column()

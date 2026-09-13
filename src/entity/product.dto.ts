@@ -6,6 +6,9 @@ export class CreateProductDto {
   category: string;
 
   @IsString()
+  id_cashea: string;
+
+  @IsString()
   modelo: string;
 
   @IsNumber()
@@ -25,6 +28,9 @@ export class CreateProductDto {
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({type: "varchar", nullable: true})
+  id_cashea: string;
 
   @Column()
   category: string;

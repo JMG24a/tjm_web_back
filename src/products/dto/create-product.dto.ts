@@ -3,6 +3,9 @@ import { Type } from "class-transformer";
 
 export class CreateProductDto {
   @IsString()
+  id_cashea: string;
+
+  @IsString()
   category: string;
 
   @IsString()
