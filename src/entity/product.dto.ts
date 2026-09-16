@@ -47,7 +47,7 @@ export class Product {
   @Column("text")
   descripcion: string;
 
-  @Column("text")
+  @Column({type: "text", nullable: true})
   size: string;
 
   @Column()

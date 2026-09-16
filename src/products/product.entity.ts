@@ -20,7 +20,7 @@ export class Products {
   @Column("text")
   descripcion: string;
 
-  @Column("text")
+  @Column({type: "text", nullable: true})
   size: string;
 
   @Column()
