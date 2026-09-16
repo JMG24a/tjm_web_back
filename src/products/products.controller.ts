@@ -12,22 +12,22 @@ export class ProductsController {
     return this.productsService.create(dto);
   }
 
-@Get('category/:category')
-async findByCategory(@Param('category') category: string) {
-  try {
-    const products = await this.productsService.findByCategory(category);
-    return products; // Nest serializa automáticamente
-  } catch (error) {
-    console.error('Error in findByCategory:', error);
-    throw new HttpException(
-      {
-        message: 'Error fetching products',
-        detail: error?.message ?? null,
-      },
-      HttpStatus.INTERNAL_SERVER_ERROR,
-    );
+  @Get('category/:category')
+  async findByCategory(@Param('category') category: string) {
+    try {
+      const products = await this.productsService.findByCategory(category);
+      return products; // Nest serializa automáticamente
+    } catch (error) {
+      console.error('Error in findByCategory:', error);
+      throw new HttpException(
+        {
+          message: 'Error fetching products',
+          detail: error?.message ?? null,
+        },
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
-}
 
   @Get(":id")
   findOne(@Param("id") id: number) {
@@ -40,7 +40,6 @@ async findByCategory(@Param('category') category: string) {
     @Body() body: Partial<Products>
   ) {
     try {
-      console.log("🚀 ~ ProductsController ~ updateProduct ~ body:", id, body)
       const updated = await this.productsService.updateProduct(id, body);
       return {
         message: "Producto actualizado correctamente",
