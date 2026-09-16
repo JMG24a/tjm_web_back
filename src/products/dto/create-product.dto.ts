@@ -19,6 +19,9 @@ export class CreateProductDto {
   descripcion: string;
 
   @IsString()
+  size: string;
+
+  @IsString()
   sku: string;
 
   @IsString()

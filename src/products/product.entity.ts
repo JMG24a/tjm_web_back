@@ -20,6 +20,9 @@ export class Products {
   @Column("text")
   descripcion: string;
 
+  @Column("text")
+  size: string;
+
   @Column()
   sku: string;
 

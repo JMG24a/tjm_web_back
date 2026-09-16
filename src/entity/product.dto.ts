@@ -18,6 +18,9 @@ export class CreateProductDto {
   descripcion: string;
 
   @IsString()
+  size: string;
+
+  @IsString()
   sku: string;
 
   @IsArray()
@@ -43,6 +46,9 @@ export class Product {
 
   @Column("text")
   descripcion: string;
+
+  @Column("text")
+  size: string;
 
   @Column()
   sku: string;
