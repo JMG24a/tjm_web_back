@@ -7,20 +7,34 @@ import { Carousels } from './entity/carousel.entity';
 import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 
+
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, }),
-    TypeOrmModule.forRoot({ 
-      type: 'postgres', 
-      url: process.env.DATABASE_URL, 
-      autoLoadEntities: true, 
-      synchronize: true, // solo para desarrollo 
-      ssl: { rejectUnauthorized: false }, // necesario para Neon
+    ConfigModule.forRoot({
+      isGlobal: true,
     }),
+
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      autoLoadEntities: true,
+
+      // Define el esquema predeterminado
+      schema: 'public',
+
+      // Solo para desarrollo
+      synchronize: true,
+
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    }),
+
     TypeOrmModule.forFeature([Precios, Carousels]),
-    ProductsModule
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+
