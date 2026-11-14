@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { IsString, IsNumber, IsArray } from "class-validator";
+import { IsString, IsNumber, IsArray, IsBoolean } from "class-validator";
 
 export class CreateProductDto {
   @IsString()
@@ -25,6 +25,9 @@ export class CreateProductDto {
 
   @IsArray()
   images: string[];
+
+  @IsBoolean()
+  active: boolean;
 }
 
 @Entity()
@@ -55,4 +58,7 @@ export class Product {
 
   @Column("text", { array: true })
   images: string[];
+
+  @Column({type: "boolean",  nullable: true})
+  active: boolean;
 }

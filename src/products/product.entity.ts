@@ -27,5 +27,8 @@ export class Products {
   sku: string;
 
   @Column("text")
-  images: string; // "url1|url2|url3"
+  images: string;
+
+  @Column({type: "boolean",  nullable: true})
+  active: boolean;
 }
